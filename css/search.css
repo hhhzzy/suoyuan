@@ -1,0 +1,379 @@
+html,
+body {
+  max-width: 750px;
+  margin: 0 auto;
+}
+/*   搜索页面样式      */
+.search-box .swiper-container {
+  max-width: 750px;
+}
+.search-box .swiper-container img {
+  width: 7.5rem;
+}
+.search-box .title {
+  font-size: 18px;
+  margin: 0.5rem auto;
+  text-align: center;
+  font-weight: bold;
+}
+.search-box .code-text {
+  width: 6rem;
+  height: 1.04rem;
+  line-height: 1.04rem;
+  text-align: center;
+  background-color: #f2f2f2;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.search-box .code-text input {
+  width: 5.5rem;
+  padding-left: 10px;
+  height: 1rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+.search-box .tips {
+  font-size: 12px;
+  color: #666;
+  padding-left: 0.75rem;
+  margin-top: 0.1rem;
+}
+.search-box .btn-box {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 7.5rem;
+}
+.search-box .btn-box .notice {
+  color: red;
+  font-size: 12px;
+  text-align: center;
+}
+.search-box .btn-box .button {
+  width: 100%;
+  height: 0.76rem;
+  text-align: center;
+  line-height: 0.76rem;
+  background-color: #2eb689;
+  color: #fff;
+  margin-top: 0.1rem;
+  cursor: pointer;
+  display: block;
+}
+/*   搜索详情页面样式      */
+.search-in-box .top-box {
+  height: 1rem;
+  border-bottom: 1px dashed #ccc;
+  background-color: #f2f2f2;
+}
+.search-in-box .top-box .text {
+  float: left;
+  color: #333;
+  font-size: 14px;
+  line-height: 1rem;
+  padding-left: 0.8rem;
+}
+.search-in-box .top-box .code {
+  height: 0.6rem;
+  width: 4.68rem;
+  background-color: #2eb689;
+  float: left;
+  margin-top: 0.2rem;
+  line-height: 0.6rem;
+  color: #fff;
+  padding-left: 0.1rem;
+}
+.search-in-box .notice {
+  text-align: center;
+  color: red;
+  padding: 0.5rem;
+  background-color: #f2f2f2;
+}
+.search-in-box .title {
+  height: 0.8rem;
+  font-size: 16px;
+  color: #FFFF00;
+  background-color: #2eb689;
+  text-align: center;
+  line-height: 0.8rem;
+}
+.search-in-box .info-scroll {
+  overflow: hidden;
+  width: 7.5rem;
+}
+.search-in-box .info-scroll img {
+  width: 7.5rem;
+  display: block;
+  height: 6rem;
+}
+.search-in-box .nav-box ul li {
+  height: 1.08rem;
+  background-color: #f2f2f2;
+  color: #333;
+  text-align: center;
+  line-height: 1.08rem;
+  font-size: 14px;
+}
+.search-in-box .nav-box ul li.current {
+  color: #fff;
+  font-weight: bold;
+  background-color: #2eb689;
+}
+.search-in-box .sy-box .title {
+  background-color: #2eb689;
+  width: 2.8rem;
+  height: 0.72rem;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  margin: 0 auto;
+  font-size: 14px;
+  border-radius: 15px;
+  margin: 0.2rem auto;
+}
+.search-in-box .sy-box .step-box {
+  overflow: hidden;
+}
+.search-in-box .sy-box .step-box .point-box {
+  min-height: 2rem;
+  position: relative;
+}
+.search-in-box .sy-box .step-box .point-box::after {
+  content: '';
+  height: 0;
+  line-height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+.search-in-box .sy-box .step-box .point-box .point {
+  width: 12px;
+  height: 12px;
+  background: #33cc99;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  margin: 0 auto;
+  position: relative;
+  z-index: 99;
+}
+.search-in-box .sy-box .step-box .point-box::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  background: #33cc99;
+  top: 5px;
+  left: 50%;
+  margin-left: -2px;
+  z-index: 98;
+}
+.search-in-box .sy-box .step-box .point-box .left-info {
+  position: absolute;
+  top: 0;
+  left: 0.05rem;
+}
+.search-in-box .sy-box .step-box .point-box .left-info .people {
+  position: absolute;
+  top: -1.5rem;
+}
+.search-in-box .sy-box .step-box .point-box .left-info .people p {
+  float: left;
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 2px solid #33cc99;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.search-in-box .sy-box .step-box .point-box .left-info .people span {
+  float: left;
+  color: #333;
+  font-size: 12px;
+  margin-top: 1rem;
+}
+.search-in-box .sy-box .step-box .point-box .left-info .people img {
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  display: block;
+}
+.search-in-box .sy-box .step-box .point-box .left-info .people::after {
+  content: '';
+  position: absolute;
+  display: block;
+  border-top: 10px solid #33cc99;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  bottom: -9px;
+  left: 0.58rem;
+}
+.search-in-box .sy-box .step-box .point-box .list-img {
+  width: 3.3rem;
+  height: 1.28rem;
+  background: #33cc99;
+  border-radius: 0.1rem;
+  overflow: hidden;
+  padding: 0.1rem;
+}
+.search-in-box .sy-box .step-box .point-box .list-img .list-swiper-container {
+  overflow: hidden;
+}
+.search-in-box .sy-box .step-box .point-box .list-img .list {
+  width: 1rem !important;
+  height: 1.12rem;
+  overflow: hidden;
+  border: 2px solid #fff;
+  border-radius: 0.2rem;
+  margin-top: 0.04rem;
+  margin-right: 0.05rem;
+}
+.search-in-box .sy-box .step-box .point-box .list-img .list img {
+  width: 1rem;
+  height: 1.12rem;
+}
+.search-in-box .sy-box .step-box .point-box .list-img .list:first-child {
+  border: none;
+  width: 1.1rem !important;
+  height: 1.2rem;
+}
+.search-in-box .sy-box .step-box .point-box .list-img .list:first-child video {
+  visibility: hidden;
+}
+.search-in-box .sy-box .step-box .point-box .list-img .list:first-child .tmp-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.1rem !important;
+  height: 1.2rem;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.search-in-box .sy-box .step-box .point-box .right,
+.search-in-box .sy-box .step-box .point-box .left {
+  background-color: #33cc99;
+  width: 2.6rem;
+  padding: 0.2rem;
+  border-radius: 10px;
+  float: right;
+  margin-top: -0.36rem;
+  position: relative;
+  margin-right: 0.2rem;
+  margin-bottom: 0.1rem;
+}
+.search-in-box .sy-box .step-box .point-box .right::after,
+.search-in-box .sy-box .step-box .point-box .left::after {
+  content: '';
+  position: absolute;
+  display: block;
+  border-right: 5px solid #33cc99;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  top: 0.2rem;
+  left: -5px;
+}
+.search-in-box .sy-box .step-box .point-box .right .bold,
+.search-in-box .sy-box .step-box .point-box .left .bold {
+  font-size: 12px;
+  font-weight: bold;
+}
+.search-in-box .sy-box .step-box .point-box .right span,
+.search-in-box .sy-box .step-box .point-box .left span,
+.search-in-box .sy-box .step-box .point-box .right .shop-name,
+.search-in-box .sy-box .step-box .point-box .left .shop-name {
+  display: block;
+  line-height: 20px;
+  font-size: 12px;
+}
+.search-in-box .sy-box .step-box .point-box .right .shop-img,
+.search-in-box .sy-box .step-box .point-box .left .shop-img {
+  overflow: hidden;
+}
+.search-in-box .sy-box .step-box .point-box .right img,
+.search-in-box .sy-box .step-box .point-box .left img {
+  display: block;
+  width: 2.5rem;
+  height: 2rem;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  margin-top: 0.1rem;
+}
+.search-in-box .sy-box .step-box .point-box .left {
+  float: left;
+  width: 2.9rem;
+  margin-left: 0.1rem;
+}
+.search-in-box .sy-box .step-box .point-box .left::after {
+  right: -5px;
+  border-left: 5px solid #33cc99;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 0;
+  left: auto;
+}
+.search-in-box .sy-box .step-box .end-point::before {
+  display: none;
+}
+.search-in-box .sy-box .step-box .end-point .point {
+  background-color: #ff9900;
+}
+.search-in-box .sy-box .step-box .end-point .end-text {
+  background-color: #2eb689;
+  width: 2.8rem;
+  height: 0.72rem;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  margin: 0 auto;
+  font-size: 14px;
+  border-radius: 15px;
+  margin: 0.2rem auto;
+  line-height: 0.72rem;
+}
+.search-in-box .cp-info {
+  padding: 0.2rem;
+  font-size: 14px;
+  line-height: 20px;
+  display: none;
+}
+.search-in-box .eat-info {
+  padding: 0.2rem;
+  font-size: 14px;
+  line-height: 20px;
+  display: none;
+}
+.search-in-box .shalter-box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  display: none;
+}
+.search-in-box .shalter-box .content {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.search-in-box .shalter-box .content video {
+  width: 100%;
+}
+.search-in-box .shalter-box .content img {
+  width: 100%;
+}
+.search-in-box h3 {
+  text-align: center;
+  padding: 0.1rem;
+  line-height: 0.5rem;
+}
+.suammary {
+  font-size: 14px;
+  text-align: center;
+  margin: 10px 0;
+}
