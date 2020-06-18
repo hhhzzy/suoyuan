@@ -1,11 +1,16 @@
 $(function(){
     $('.code').html(GetQueryValue('code'))
-    var code = GetQueryValue('code').replace(/^([a-zA-Z]{0,4})/,'');
-    console.log(code)
+    if(!GetQueryValue('code')){
+        $('.notice').html('<h3 style="color:#333;">该产品未在食安溯源平台进行认证，请与经销商联系</h3>');
+        $('.have-box').html('');
+        return;
+    }
     if(GetQueryValue('code').indexOf('SASY') < 0){
         $('.notice').html('<h3 style="color:#333;">该产品未在食安溯源平台进行认证，请与经销商联系</h3>');
         $('.have-box').html('');
     } else {
+        var code = GetQueryValue('code').replace(/^([a-zA-Z]{0,4})/,'');
+        console.log(code)
         if(parseInt(code) >= 202004103121 && parseInt(code) <= 202004103900){
             $('.shop-img img').attr('src','images/1.jpg');
             $('.shop-name').html('经销商：御森燕（福州店）');
@@ -96,6 +101,30 @@ $(function(){
             $('.left-info .list-img .swiper-wrapper').append('<div class="list swiper-slide zoom-img"><img src="images/aa.jpg" alt=""></div>')
             $('.people-img').attr('src','images/aa.jpg');
             $('.people-name').hide()
+        }else if(parseInt(code) >= 202004111873 && parseInt(code) <= 202004113432){
+            $('.shop-img img').attr('src','images/7.jpg');
+            $('.shop-name').html('经销商：重庆藏珍堂保健品有限公司');
+            if(parseInt(code)+200 >(202004111873+200)){
+                $('.people-img').attr('src','images/people_1.png')
+                $('.people-name').html('次旦多吉');
+            }
+            $('.cj').html('采集地：玉树');
+            $('.sc').html('生产地：玉树');
+            $('.left-info .list-img .swiper-wrapper').append('<div class="list swiper-slide zoom-img"><img src="images/aa.jpg" alt=""></div>')
+            $('.people-img').attr('src','images/aa.jpg');
+            $('.people-name').hide()
+        }else if(parseInt(code) >= 202004113433 && parseInt(code) <= 202004116708){
+            $('.shop-img img').attr('src','images/7.jpg');
+            $('.shop-name').html('经销商：重庆藏珍堂保健品有限公司');
+            if(parseInt(code)+200 >(202004113433+200)){
+                $('.people-img').attr('src','images/people_1.png')
+                $('.people-name').html('次旦多吉');
+            }
+            $('.cj').html('采集地：玉树');
+            $('.sc').html('生产地：玉树');
+            $('.left-info .list-img .swiper-wrapper').append('<div class="list swiper-slide zoom-img"><img src="images/aa.jpg" alt=""></div>')
+            $('.people-img').attr('src','images/aa.jpg');
+            $('.people-name').hide()
         }else if(parseInt(code) >= 202004104681 && parseInt(code) <= 202004105460){
             $('.shop-img img').attr('src','images/8.jpg');
             $('.shop-name').html('经销商：宁波百草传奇总部');
@@ -128,6 +157,13 @@ $(function(){
             $('.shop-img img').attr('src','images/12.jpg');
             $('.shop-name').html('经销商：新疆鸿德堂');
             if(parseInt(code)+200 >(202004108425+200)){
+                $('.people-img').attr('src','images/people_1.png')
+                $('.people-name').html('次旦多吉');
+            }
+        }else if(parseInt(code) >= 202004111093 && parseInt(code) <= 202004111872){
+            $('.shop-img img').attr('src','images/12.jpg');
+            $('.shop-name').html('经销商：新疆鸿德堂');
+            if(parseInt(code)+200 >(202004111093+200)){
                 $('.people-img').attr('src','images/people_1.png')
                 $('.people-name').html('次旦多吉');
             }
