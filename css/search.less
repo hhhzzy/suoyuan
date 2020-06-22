@@ -301,6 +301,8 @@ html,body{
                         display: block;
                         line-height: 20px;
                         font-size: 12px;
+                        word-wrap:break-word; 
+                        word-break:break-all;
                     }
                     .shop-img{
                         overflow: hidden;
@@ -346,7 +348,7 @@ html,body{
                     margin:0 auto;
                     font-size: 14px;
                     border-radius: 15px;
-                    margin:0.2rem auto;
+                    margin: 0.2rem auto;
                     line-height: 0.72rem;
                 }
             }
@@ -372,7 +374,6 @@ html,body{
         width: 100%;
         background-color: rgba(0, 0, 0, 0.8);;
         z-index: 999;
-        display: none;
         .content{
             width: 90%;
             margin:0 auto;
@@ -397,4 +398,13 @@ html,body{
     font-size: 14px;
     text-align: center;
     margin: 10px 0;
+}
+.product-swiper-container{
+    overflow: hidden;
+    img{
+        width: calc(100% - 4px) !important;
+    }
+    .swiper-slide{
+        width: 100% !important;
+    }
 }

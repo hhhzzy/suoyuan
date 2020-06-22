@@ -1,7 +1,7 @@
 $(function(){
     $('.code').html(GetQueryValue('code'))
     if(!GetQueryValue('code')){
-        $('.notice').html('<h3 style="color:#333;">该产品未在食安溯源平台进行认证，请与经销商联系</h3>');
+        $('.notice').html('<h3 style="color:#333;"></h3>');
         $('.have-box').html('');
         return;
     }
@@ -187,14 +187,6 @@ $(function(){
     //     }
             
     // }
-    new Swiper ('.shop-img-swiper-container', {
-        autoplay:true,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-    })
-
 
 })
 Vue.filter('form_date', function (value) {
@@ -207,33 +199,68 @@ Vue.filter('form_date', function (value) {
 new Vue({
     el: '#app-box',
     data: {
+        id:'',
         url:"http://39.99.218.38:8500/",
         DataInfo:{
         },
+        headInfo:{},
+        vedioUrl:'',
+        shalterBool:false,
+        bannerImg:[],
+        noticeText:'经食安溯源平台认证，该产品为源产地正品。'
     },
     components: {
     },
     methods: {
         GetData(){
-            $.ajax({
-                url:this.url+'api/queryMessageByProductCode?productCode=SASY202004100001',
-                success:(res) => {
-                    if(res.code){
-                        this.DataInfo = res.data.nodeMessageMap;
-
-                        for (const key in this.DataInfo) {
-                            if (this.DataInfo.hasOwnProperty(key)) {
-                                this.DataInfo[key].forEach((ele,index) => {
-                                    if(ele.nodeName){
-                                        this.DataInfo[key].splice(index,1);
-                                        this.DataInfo[key].unshift(ele);
-                                    }
-                                });
+            return new Promise( resolve => {
+                $.ajax({
+                    url:this.url+'api/queryMessageByProductCode?productCode='+this.GetQueryValue('code'),
+                    success:(res) => {
+                        console.log(res.code)
+                        if(res.code == 1){
+                            this.DataInfo = res.data.nodeMessageMap;
+    
+                            for (const key in this.DataInfo) {
+                                if (this.DataInfo.hasOwnProperty(key)) {
+                                    this.DataInfo[key].forEach((ele,index) => {
+                                        if(ele.nodeName){
+                                            this.DataInfo[key].splice(index,1);
+                                            this.DataInfo[key].unshift(ele);
+                                        }
+                                        if(ele.columnName == 'product_img'){
+                                            ele.imgArr = [];
+                                            ele.value.split('|').forEach(item => {
+                                                ele.imgArr.push('api/upload/getImg?imgUrl='+encodeURIComponent(item))
+                                            })
+                                            this.DataInfo[key].splice(index,1);
+                                            this.DataInfo[key].push(ele);
+                                        }
+                                        if(key == 'firstNodeList' && ele.nodeType == 8){
+                                            this.headInfo.userImg = 'api/upload/getImg?imgUrl='+encodeURIComponent(ele.userImg);
+                                            this.headInfo.name = ele.value;
+                                        }
+                                        if(key == 'firstNodeList' && ele.nodeType == 4){
+                                            this.vedioUrl = 'api/upload/getImg?imgUrl='+encodeURIComponent(ele.value);
+                                        }
+                                    });
+                                }
                             }
+                            console.log(this.DataInfo)
+                        } else{
+                            this.noticeText = '该产品未在食安溯源平台进行认证，请与经销商联系。';
                         }
+                        resolve();
                     }
-                }
-            })
+                })
+            } )
+        },
+        ShowBig:function(){
+            console.log(11)
+            this.shalterBool = true;
+        },
+        CloseShow:function(){
+            this.shalterBool = false;
         },
         GetImg(){
             $.ajax({
@@ -260,8 +287,22 @@ new Vue({
 
     },
     mounted: async function () {
-        this.GetData();
+        await this.GetData();
         this.GetImg();
+        new Swiper (this.$refs['product-swiper-container'], {
+            autoplay:false,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        })
+        new Swiper (this.$refs['shop-img-swiper-container'], {
+            autoplay:true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        })
     }
 });
     

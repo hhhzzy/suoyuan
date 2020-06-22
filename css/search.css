@@ -286,6 +286,8 @@ body {
   display: block;
   line-height: 20px;
   font-size: 12px;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 .search-in-box .sy-box .step-box .point-box .right .shop-img,
 .search-in-box .sy-box .step-box .point-box .left .shop-img {
@@ -352,7 +354,6 @@ body {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 999;
-  display: none;
 }
 .search-in-box .shalter-box .content {
   width: 90%;
@@ -376,4 +377,13 @@ body {
   font-size: 14px;
   text-align: center;
   margin: 10px 0;
+}
+.product-swiper-container {
+  overflow: hidden;
+}
+.product-swiper-container img {
+  width: calc(100% - 4px) !important;
+}
+.product-swiper-container .swiper-slide {
+  width: 100% !important;
 }

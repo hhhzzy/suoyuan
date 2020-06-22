@@ -17,7 +17,7 @@
             <p class="text">溯源码：</p>
             <p class="code"></p>
         </div>
-        <p class="notice">经食安溯源平台认证，该产品为源产地正品。</p>
+        <p class="notice">{{noticeText}}</p>
         <p class="title">原生态，嚼着吃！</p>
         <div class="info-scroll info-swiper-container">
             <ul class="swiper-wrapper">
@@ -50,63 +50,57 @@
                     <div class="point-box">
                         <p class="point"></p>
                     </div>
-                    <div class="point-box" v-if="DataInfo.firstNodeList">
-                        <template>
+                    <div class="point-box" v-for="(value,key,index) in DataInfo">
+                        <template v-if="key == 'firstNodeList'">
                             <p class="point"></p>
                             <div class="left-info">
                                 <div class="people">
-                                    <p><img class="people-img" src="images/people.jpg" alt=""></p>
-                                    <span class="people-name"></span>
+                                    <p><img class="people-img" :src="url+headInfo.userImg" alt=""></p>
+                                    <span class="people-name">{{headInfo.name}}</span>
                                 </div>
                                 <div class="list-img">
                                     <div class="list-swiper-container">
                                         <div class="swiper-wrapper">
-                                            <div class="list swiper-slide zoom-img">
+                                            <div class="list swiper-slide zoom-img" v-on:click="ShowBig">
                                                 <video data-info="video" src="images/vedio.mp4"></video>
                                                 <img src="images/u100.png" alt="" class="tmp-img">
                                             </div>
-                                            <div class="list swiper-slide zoom-img"><img src="images/step_2.jpg" alt=""></div>
+                                            <!-- <div class="list swiper-slide zoom-img"><img src="images/step_2.jpg" alt=""></div>
                                             <div class="list swiper-slide zoom-img"><img src="images/step_3.jpg" alt=""></div>
                                             <div class="list swiper-slide zoom-img"><img src="images/step_4.jpg" alt=""></div>
                                             <div class="list swiper-slide zoom-img"><img src="images/step_5.jpg" alt=""></div>
-                                            <div class="list swiper-slide zoom-img"><img src="images/step_1.jpg" alt=""></div>
+                                            <div class="list swiper-slide zoom-img"><img src="images/step_1.jpg" alt=""></div> -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="right">
-                                <template v-for="(item,index) in DataInfo.firstNodeList" >
+                                <template v-for="(item,index) in value" >
                                     <span class="bold" v-if="item.nodeName">环节：{{item.nodeName}}</span>
                                     <span v-else-if="item.nodeType != 4 && !item.nodeName">{{item.columnChineseName}}：{{item.value}}</span>
                                 </template>            
                             </div>
                         </template>
-                    </div>
-                    <div class="point-box" v-if="DataInfo.secondNodeList">
-                        <p class="point"></p>
-                        <div class="left">
-                            <template v-for="(item,index) in DataInfo.secondNodeList" >
-                                <span class="bold" v-if="item.nodeName">环节：{{item.nodeName}}</span>
-                                <span v-else-if="item.nodeType != 4 && item.nodeType != 3 && item.nodeType != 2  && !item.nodeName">{{item.columnChineseName}}：{{item.value}}</span>
-                            </template>   
-                        </div>
-                    </div>
-                    <div class="point-box" v-if="DataInfo.thirdNodeList">
-                        <p class="point"></p>
-                        <div class="right">
-                            <template v-for="(item,index) in DataInfo.thirdNodeList" >
-                                <span class="bold" v-if="item.nodeName">环节：{{item.nodeName}}</span>
-                                <span v-else-if="item.nodeType != 4 && item.nodeType != 3 && item.nodeType != 2 && !item.nodeName">{{item.columnChineseName}}：{{item.value}}</span>
-                            </template>  
-                            <div class="shop-img  shop-img-swiper-container">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide zoom-img">
-                                        <img src="images/1.jpg" alt="">
+                        <template v-else>
+                            <p class="point"></p>
+                            <div v-bind:class="[index % 2 == 0?'right':'left']">
+                                <template v-for="(item,index) in value" >
+                                    <span class="bold" v-if="item.nodeName">环节：{{item.nodeName}}</span>
+                                    <div v-else-if="item.columnName == 'product_img' ">
+                                        <div class="product-swiper-container" ref="product-swiper-container">
+                                            <div class="swiper-wrapper">
+                                                <div class="list swiper-slide zoom-img" v-for="(ele,ind) in item.imgArr" :key="ind">
+                                                    <img :src="url+ele"  alt="">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    <span v-else-if="item.nodeType != 4 && item.nodeType != 3 && item.nodeType != 2  && !item.nodeName">{{item.columnChineseName}}：{{item.value}}</span>
+                                </template>   
                             </div>
-                        </div>
+                        </template>
                     </div>
+                    
                     <div class="point-box end-point">
                         <p class="point"></p>
                         <div class="end-text">被您幸运的选中啦</div>
@@ -129,9 +123,9 @@
                 <p>使用量：养生保健，每日1—2根</p>
                 <p>储存方法：零下15℃冷冻、密封储存，不建议储存时间太长（6个月内最佳）</p>
             </div>
-            <div class="shalter-box">
+            <div class="shalter-box" v-if="shalterBool" v-on:click="CloseShow">
                 <div class="content">
-                    
+                    <video :src="url+vedioUrl" controls="controls" autoplay="true"></video>
                 </div>
             </div>
         </div>
