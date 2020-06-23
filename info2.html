@@ -19,24 +19,15 @@
         </div>
         <p class="notice">{{noticeText}}</p>
         <p class="title">原生态，嚼着吃！</p>
-        <div class="info-scroll info-swiper-container">
+        <div class="info-scroll" ref="info-swiper-container">
             <ul class="swiper-wrapper">
-                <li class="swiper-slide">
-                    <a href="javascript:;"><img src="images/info_1.jpg" alt=""></a>
-                </li>
-                <li class="swiper-slide">
-                    <a href="javascript:;"><img src="images/info_2.jpg" alt=""></a>
-                </li>
-                <li class="swiper-slide">
-                    <a href="javascript:;"><img src="images/info_3.jpg" alt=""></a>
-                </li>
-                <li class="swiper-slide">
-                    <a href="javascript:;"><img src="images/info_4.jpg" alt=""></a>
+                <li class="swiper-slide" v-for="(item,index) in bannerList" :key="index">
+                    <a href="javascript:;"><img :src="url+item" alt=""></a>
                 </li>
             </ul>
         </div>
-        <p class="suammary">可以点击视频或图片查看详情，了解更多的产品信息和食用方法。</p>
-        <div class="have-box">
+        <p class="suammary" v-if="haveBool">可以点击视频或图片查看详情，了解更多的产品信息和食用方法。</p>
+        <div class="have-box" v-if="haveBool">
             <div class="nav-box">
                 <ul class="flex-box">
                     <li class="flex1 current">溯源信息</li>
@@ -109,19 +100,16 @@
             </div>
             <div class="cp-info nav-list">
                 <p>
-                    <strong>产品名称：</strong>冬虫夏草
+                    <strong>产品名称：</strong>{{goodsName}}
                 </p>
                 <p>
-                    <strong>产品描述：</strong>本品由虫体与从虫头部长出的真菌子座相连而成。虫体形如蚕，长3—5cm，
-
-                    直径0.3~0.8 cm。表面深黄色至黄棕色，有环纹20~30个，近头部的环纹较细；头部红棕色；足8对，中部4对较明显；质脆，易折断，断面略平坦，淡黄白色。
+                    <strong>产品描述：</strong><span v-html="goodsInfo"></span>
                 </p>
             </div>
             <div class="eat-info nav-list">
-                <p><strong>新鲜虫草食用方法</strong></p>
-                <p>嚼食：取出新鲜冬虫夏草，放置半小时解冻，直接放入口中，慢嚼细咽，具有绵软的蘑菇口感，并有一股浓香味。</p>
-                <p>使用量：养生保健，每日1—2根</p>
-                <p>储存方法：零下15℃冷冻、密封储存，不建议储存时间太长（6个月内最佳）</p>
+                <p><strong>{{eatObj.messageTitle}}</strong></p>
+                <p v-html="eatObj.messageDesc"></p>
+                <p v-html="eatObj.messageDetail"></p>
             </div>
             <div class="shalter-box" v-if="shalterBool" v-on:click="CloseShow">
                 <div class="content">

@@ -207,7 +207,12 @@ new Vue({
         vedioUrl:'',
         shalterBool:false,
         bannerImg:[],
-        noticeText:'经食安溯源平台认证，该产品为源产地正品。'
+        noticeText:'经食安溯源平台认证，该产品为源产地正品。',
+        bannerList:[],
+        haveBool:true,
+        goodsName:'',
+        goodsInfo:'',
+        eatObj:{}
     },
     components: {
     },
@@ -217,8 +222,8 @@ new Vue({
                 $.ajax({
                     url:this.url+'api/queryMessageByProductCode?productCode='+this.GetQueryValue('code'),
                     success:(res) => {
-                        console.log(res.code)
-                        if(res.code == 1){
+                        console.log(res.code == 1)
+                        if(res.code && res.data.code != 0){
                             this.DataInfo = res.data.nodeMessageMap;
     
                             for (const key in this.DataInfo) {
@@ -243,12 +248,30 @@ new Vue({
                                         if(key == 'firstNodeList' && ele.nodeType == 4){
                                             this.vedioUrl = 'api/upload/getImg?imgUrl='+encodeURIComponent(ele.value);
                                         }
+                                        if(key == 'secondNodeList'){
+                                            if(ele.nodeType == 3){
+                                                this.goodsInfo = ele.value;
+                                            }
+                                            if(ele.columnChineseName == '产品名称'){
+
+                                                this.goodsName = ele.value;
+                                            }
+                                        }
                                     });
                                 }
                             }
+                            res.data.imgList.forEach(item => {
+                                if(item.imgType == 2){
+                                    item.imgUrl.split("|").forEach(ele => {
+                                        this.bannerList.push('api/upload/getImg?imgUrl='+encodeURIComponent(ele))
+                                    })
+                                }
+                            })
+                            this.eatObj = res.data.messageData?res.data.messageData:{};
                             console.log(this.DataInfo)
                         } else{
                             this.noticeText = '该产品未在食安溯源平台进行认证，请与经销商联系。';
+                            this.haveBool = false;
                         }
                         resolve();
                     }
@@ -302,6 +325,10 @@ new Vue({
                 el: '.swiper-pagination',
                 clickable: true,
             },
+        })
+        new Swiper (this.$refs['info-swiper-container'], {
+            autoplay: true,
+            loop: true, // 循环模式选项
         })
     }
 });
