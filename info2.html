@@ -52,12 +52,12 @@
                                 <div class="list-img">
                                     <div class="list-swiper-container">
                                         <div class="swiper-wrapper">
-                                            <div class="list swiper-slide zoom-img" v-on:click="ShowBig">
+                                            <div class="list swiper-slide zoom-img" v-on:click="ShowBig('vedio')">
                                                 <video data-info="video" src="images/vedio.mp4"></video>
                                                 <img src="images/u100.png" alt="" class="tmp-img">
                                             </div>
-                                            <!-- <div class="list swiper-slide zoom-img"><img src="images/step_2.jpg" alt=""></div>
-                                            <div class="list swiper-slide zoom-img"><img src="images/step_3.jpg" alt=""></div>
+                                            <div v-on:click="ShowBig('img',item)" v-for="(item,index) in firstImgArr" :key="index" class="list swiper-slide zoom-img"><img :src="url+item" alt=""></div>
+                                            <!-- <div class="list swiper-slide zoom-img"><img src="images/step_3.jpg" alt=""></div>
                                             <div class="list swiper-slide zoom-img"><img src="images/step_4.jpg" alt=""></div>
                                             <div class="list swiper-slide zoom-img"><img src="images/step_5.jpg" alt=""></div>
                                             <div class="list swiper-slide zoom-img"><img src="images/step_1.jpg" alt=""></div> -->
@@ -68,7 +68,7 @@
                             <div class="right">
                                 <template v-for="(item,index) in value" >
                                     <span class="bold" v-if="item.nodeName">环节：{{item.nodeName}}</span>
-                                    <span v-else-if="item.nodeType != 4 && !item.nodeName">{{item.columnChineseName}}：{{item.value}}</span>
+                                    <span v-else-if="item.nodeType != 4 && !item.nodeName && item.nodeType != 2">{{item.columnChineseName}}：{{item.value}}</span>
                                 </template>            
                             </div>
                         </template>
@@ -80,7 +80,7 @@
                                     <div v-else-if="item.columnName == 'product_img' ">
                                         <div class="product-swiper-container" ref="product-swiper-container">
                                             <div class="swiper-wrapper">
-                                                <div class="list swiper-slide zoom-img" v-for="(ele,ind) in item.imgArr" :key="ind">
+                                                <div class="list swiper-slide zoom-img" v-on:click="ShowBig('img',ele)" v-for="(ele,ind) in item.imgArr" :key="ind">
                                                     <img :src="url+ele"  alt="">
                                                 </div>
                                             </div>
@@ -110,10 +110,12 @@
                 <p><strong>{{eatObj.messageTitle}}</strong></p>
                 <p v-html="eatObj.messageDesc"></p>
                 <p v-html="eatObj.messageDetail"></p>
+                <img :src="url+eatObj.messageImg" alt="">
             </div>
             <div class="shalter-box" v-if="shalterBool" v-on:click="CloseShow">
                 <div class="content">
-                    <video :src="url+vedioUrl" controls="controls" autoplay="true"></video>
+                    <video v-if="shalterType == 'vedio'" :src="url+vedioUrl" controls="controls" autoplay="true"></video>
+                    <img v-if="shalterType == 'img'" :src="url+imgUrl" alt="">
                 </div>
             </div>
         </div>

@@ -191,8 +191,10 @@ body {
 .search-in-box .sy-box .step-box .point-box .left-info .people span {
   float: left;
   color: #333;
-  font-size: 12px;
-  margin-top: 1rem;
+  font-size: 16px;
+  margin-top: 0.5rem;
+  margin-left: 0.1rem;
+  font-weight: bold;
 }
 .search-in-box .sy-box .step-box .point-box .left-info .people img {
   width: 1.3rem;
@@ -345,6 +347,9 @@ body {
   font-size: 14px;
   line-height: 20px;
   display: none;
+}
+.search-in-box .eat-info img {
+  width: 100%;
 }
 .search-in-box .shalter-box {
   position: fixed;

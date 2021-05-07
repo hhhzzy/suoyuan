@@ -41,26 +41,8 @@ window.onload = function(){
     })
     // 进入详情页面
     $('#gotoinfo').click(function(){
-        var url ="https://sys.shiansuyuan.com/";
         if(!$('#sy-code').val()) return;
-        var xhr = new XMLHttpRequest();
-        xhr.open("get", url+'api/queryMessageByProductCode?productCode='+$('#sy-code').val(), true);
-        xhr.setRequestHeader('content-type', 'application/json');
-        xhr.onload =  () => {
-            if (xhr.status == 200) {
-                var res = JSON.parse(xhr.response);
-                console.log(res);
-                if(res.code ==1){
-                    if(res.data.msg == "没有此溯源码信息"){
-                        location.href="info.html?code="+$('#sy-code').val()
-                    }else{
-                        location.href="info2.html?code="+$('#sy-code').val()
-                    }
-                }
-            }
-        }
-        xhr.send();
-        // location.href="info.html?code="+$('#sy-code').val()
+        location.href="info2.html?code="+$('#sy-code').val()
     }) 
     
 }

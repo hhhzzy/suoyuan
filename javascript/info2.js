@@ -200,7 +200,7 @@ new Vue({
     el: '#app-box',
     data: {
         id:'',
-        url:"https://www.shiansuyuan.com/manager/",
+        url:"https://sys.shiansuyuan.com/",
         DataInfo:{
         },
         headInfo:{},
@@ -212,17 +212,22 @@ new Vue({
         haveBool:true,
         goodsName:'',
         goodsInfo:'',
-        eatObj:{}
+        eatObj:{},
+        firstImgArr:[],
+        shalterType:'',
+        imgUrl:''
     },
     components: {
     },
     methods: {
-        GetData(){
+        GetData: function(){
             return new Promise( resolve => {
-                $.ajax({
-                    url:this.url+'api/queryMessageByProductCode?productCode='+this.GetQueryValue('code'),
-                    success:(res) => {
-                        console.log(res.code == 1)
+	        	var xhr = new XMLHttpRequest();
+	            xhr.open("get", this.url+'api/queryMessageByProductCode?productCode='+this.GetQueryValue('code'), true);
+	            xhr.setRequestHeader('content-type', 'application/json');
+	            xhr.onload =  () => {
+	                if (xhr.status == 200) {
+	                    var res = JSON.parse(xhr.response);
                         if(res.code && res.data.code != 0){
                             this.DataInfo = res.data.nodeMessageMap;
     
@@ -240,6 +245,11 @@ new Vue({
                                             })
                                             this.DataInfo[key].splice(index,1);
                                             this.DataInfo[key].push(ele);
+                                        }
+                                        if(key == 'firstNodeList'){
+                                            if(ele.nodeType == 2){
+                                                this.firstImgArr.push('api/upload/getImg?imgUrl='+encodeURIComponent(ele.value));
+                                            }
                                         }
                                         if(key == 'firstNodeList' && ele.nodeType == 8){
                                             this.headInfo.userImg = 'api/upload/getImg?imgUrl='+encodeURIComponent(ele.userImg);
@@ -268,24 +278,50 @@ new Vue({
                                 }
                             })
                             this.eatObj = res.data.messageData?res.data.messageData:{};
-                            console.log(this.DataInfo)
+                            if(this.eatObj.messageDetail){
+                                this.eatObj.messageDetail = this.eatObj.messageDetail.replace(/<img src="\/service/g,'<img src="'+ this.url+'api');
+                            }
+                            if( this.eatObj.messageImg){
+                                this.eatObj.messageImg = this.eatObj.messageImg?'api/upload/getImg?imgUrl='+encodeURIComponent(this.eatObj.messageImg):'';
+                            }
+
                         } else{
                             this.noticeText = '该产品未在食安溯源平台进行认证，请与经销商联系。';
                             this.haveBool = false;
                         }
                         resolve();
-                    }
-                })
+
+	                }
+	            };
+	            xhr.send();
+//                $.ajax({
+//                    url:this.url+'api/queryMessageByProductCode?productCode='+this.GetQueryValue('code'),
+//                    contentType:'application/json',
+//                    headers: {
+//			        Accept: '*/*',
+//			    },
+//                    timeout : 3000,
+//                    type:'get',
+//                    dataType: 'json',
+//                    success:(res) => {
+//                    	console.log(res)
+//                        console.log(res.code == 1)
+//                    }
+//
+//                })
             } )
         },
-        ShowBig:function(){
-            console.log(11)
+        ShowBig:function(type,item){
+            this.shalterType = type;
             this.shalterBool = true;
+            if(type == 'img'){
+                this.imgUrl = item;
+            }
         },
         CloseShow:function(){
             this.shalterBool = false;
         },
-        GetImg(){
+        GetImg: function(){
             $.ajax({
                 url:this.url+'api/upload/getImg',
                 success:(res) => {
@@ -305,9 +341,6 @@ new Vue({
             }
             return false;
         }
-    },
-    computed: {
-
     },
     mounted: async function () {
         await this.GetData();
